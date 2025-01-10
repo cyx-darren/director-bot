@@ -1,15 +1,21 @@
-entrypoint = "main.py"
-modules = ["python-3.11"]
+run = "python3 main.py"
+modules = ["python-3.10:v18-20230807-322e88b"]
 
 [nix]
-channel = "stable-24_05"
+channel = "stable-22_11"
 
-[unitTest]
-language = "python3"
+[env]
+PYTHONPATH = "${PYTHONPATH}:${workspaceFolder}"
 
-[gitHubImport]
-requiredFiles = [".replit", "replit.nix"]
+[languages.python]
+pattern = "**/*.py"
+syntax = "python"
 
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "cloudrun"
+build = ["pip", "install", "-r", "requirements.txt"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
