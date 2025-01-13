@@ -13,9 +13,14 @@ syntax = "python"
 
 [deployment]
 run = ["python3", "main.py"]
-deploymentTarget = "cloudrun"
+deploymentTarget = "gce"
 build = ["pip", "install", "-r", "requirements.txt"]
+ignorePorts = true
 
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
